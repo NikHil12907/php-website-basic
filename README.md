@@ -62,7 +62,6 @@ cd php-website-basic
    ```
 
 3. **Configure database connection:**
-   
    Edit `includes/database.php` and update the database credentials:
    ```php
    define('DB_HOST', 'localhost');     // Your database host
@@ -73,7 +72,60 @@ cd php-website-basic
 
 ### Step 3: Web Server Setup
 
-#### Option A: Using PHP Built-in Server (Development)
+#### Option A: Using XAMPP (Recommended for Beginners & College Projects)
+
+**Perfect for demonstrations, college projects, and local development!**
+
+1. **Download and Install XAMPP:**
+   - Visit [https://www.apachefriends.org/](https://www.apachefriends.org/)
+   - Download XAMPP for your operating system (Windows, macOS, or Linux)
+   - Install XAMPP with default settings
+
+2. **Copy Project to XAMPP:**
+   ```bash
+   # Navigate to XAMPP installation directory
+   # Windows: C:\xampp\htdocs
+   # macOS: /Applications/XAMPP/htdocs
+   # Linux: /opt/lampp/htdocs
+   
+   # Copy your project folder to htdocs
+   cp -r php-website-basic /path/to/xampp/htdocs/
+   ```
+   
+   Or simply drag and drop the `php-website-basic` folder into the `htdocs` directory.
+
+3. **Start XAMPP Services:**
+   - Open XAMPP Control Panel
+   - Click "Start" next to **Apache** (for web server)
+   - Click "Start" next to **MySQL** (for database)
+   - Wait for both services to show "Running" status
+
+4. **Configure Database (XAMPP):**
+   - Open your browser and go to: `http://localhost/phpmyadmin`
+   - Create a new database named `php_website_basic`
+   - Run the SQL commands from Step 2 to create the users table
+   - Update `includes/database.php` with XAMPP default credentials:
+     ```php
+     define('DB_HOST', 'localhost');
+     define('DB_NAME', 'php_website_basic');
+     define('DB_USER', 'root');          // Default XAMPP username
+     define('DB_PASS', '');              // Default XAMPP password (empty)
+     ```
+
+5. **Access Your Website:**
+   - Open your web browser
+   - Navigate to: `http://localhost/php-website-basic/public/`
+   - Your PHP website should now be running!
+
+**XAMPP Benefits for Students & Demos:**
+- ✅ No complex server configuration needed
+- ✅ Perfect for college assignments and project presentations
+- ✅ Easy to start/stop services as needed
+- ✅ Includes phpMyAdmin for easy database management
+- ✅ Works on Windows, macOS, and Linux
+- ✅ Great for learning PHP development
+
+#### Option B: Using PHP Built-in Server (Development)
 
 ```bash
 # Navigate to the project directory
@@ -83,13 +135,12 @@ cd php-website-basic
 php -S localhost:8000 -t public
 ```
 
-Then visit: `http://localhost:8000`
+Then visit: http://localhost:8000
 
-#### Option B: Using Apache/Nginx (Production)
+#### Option C: Using Apache/Nginx (Production)
 
 1. **Apache Configuration:**
-   
-   Create a virtual host or point your document root to the `public` folder:
+   Create a virtual host or point your document root to the public folder:
    ```apache
    <VirtualHost *:80>
        DocumentRoot "/path/to/php-website-basic/public"
@@ -136,6 +187,7 @@ sudo chmod -R 755 php-website-basic/
 ### Adding Custom Styles
 
 You can add custom CSS to `css/style.css`. The file already includes:
+
 - Custom utility classes
 - Form styling helpers
 - Animation utilities
@@ -144,6 +196,7 @@ You can add custom CSS to `css/style.css`. The file already includes:
 ### Extending the Database
 
 The `includes/database.php` file provides a Database class with methods for:
+
 - `query()` - Execute prepared statements
 - `single()` - Get single record
 - `resultSet()` - Get multiple records
@@ -155,7 +208,7 @@ The `includes/database.php` file provides a Database class with methods for:
 ### Basic Database Query
 
 ```php
-<?php
+<?php 
 require_once '../includes/database.php';
 
 // Get all users
@@ -175,7 +228,7 @@ $database->query(
 ### Form Processing
 
 ```php
-<?php
+<?php 
 if ($_POST) {
     $name = htmlspecialchars($_POST['name']);
     $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
@@ -214,6 +267,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 💡 Next Steps
 
 This template provides a foundation. Consider adding:
+
 - User session management
 - CSRF protection
 - Environment-based configuration
@@ -225,10 +279,10 @@ This template provides a foundation. Consider adding:
 ## 🐛 Issues & Support
 
 If you encounter any issues or have questions:
+
 1. Check the [Issues](https://github.com/NikHil12907/php-website-basic/issues) page
 2. Create a new issue with detailed information
 3. Include your PHP version, web server, and database setup
 
 ---
-
 **Built with ❤️ using PHP, MySQL, and Tailwind CSS**
